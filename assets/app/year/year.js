@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.year', ['ngRoute'])
+angular.module('myApp', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
 
   $routeProvider.when('/year', {
-    templateUrl: 'year/year.html',
+    templateUrl: 'app/year/year.html',
     controller: 'YearCtrl'
   });
 
