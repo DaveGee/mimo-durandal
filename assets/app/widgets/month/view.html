@@ -1,23 +1,25 @@
 <div>
-  <h2 data-bind="value: month, format: 'monthName'"></h2>
+  <h2 data-bind="value: monthNb, format: 'monthName'"></h2>
+	<span data-bind="text: month.startOf('month').format('DD.MM.YY')"></span> -
+	<span data-bind="text: month.endOf('month').format('DD.MM.YY')"></span>
 
   <div class="row">
-    <div class="col-sm-1">L</div>
-    <div class="col-sm-1">M</div>
-    <div class="col-sm-1">M</div>
-    <div class="col-sm-1">J</div>
-    <div class="col-sm-1">V</div>
-    <div class="col-sm-1">S</div>
-    <div class="col-sm-1">D</div>
+	<div class="col-sm-1">L</div>
+	<div class="col-sm-1">M</div>
+	<div class="col-sm-1">M</div>
+	<div class="col-sm-1">J</div>
+	<div class="col-sm-1">V</div>
+	<div class="col-sm-1">S</div>
+	<div class="col-sm-1">D</div>
   </div>
   <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1"></div>
+	<div class="col-sm-1"></div>
+	<div class="col-sm-1"></div>
+	<div class="col-sm-1"></div>
+	<div class="col-sm-1"></div>
+	<div class="col-sm-1"></div>
+	<div class="col-sm-1"></div>
+	<div class="col-sm-1"></div>
   </div>
 
 </div>
