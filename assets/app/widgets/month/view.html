@@ -1,25 +1,17 @@
 <div>
-  <h2 data-bind="value: monthNb, format: 'monthName'"></h2>
-	<span data-bind="text: month.startOf('month').format('DD.MM.YY')"></span> -
-	<span data-bind="text: month.endOf('month').format('DD.MM.YY')"></span>
+    <h2 data-bind="value: monthNb, format: 'monthName'"></h2>
 
-  <div class="row">
-	<div class="col-sm-1">L</div>
-	<div class="col-sm-1">M</div>
-	<div class="col-sm-1">M</div>
-	<div class="col-sm-1">J</div>
-	<div class="col-sm-1">V</div>
-	<div class="col-sm-1">S</div>
-	<div class="col-sm-1">D</div>
-  </div>
-  <div class="row">
-	<div class="col-sm-1"></div>
-	<div class="col-sm-1"></div>
-	<div class="col-sm-1"></div>
-	<div class="col-sm-1"></div>
-	<div class="col-sm-1"></div>
-	<div class="col-sm-1"></div>
-	<div class="col-sm-1"></div>
-  </div>
+    <div class="row" data-bind="foreach: daysInWeek">
+        <div class="col-sm-12" data-bind="value: $data, format: 'dayNameShort'"></div>
+    </div>
+
+    <!-- ko foreach: weeksInMonth -->
+
+    <div class="row" data-bind="foreach: $parent.daysInWeek">
+        <div class="col-sm-12" data-bind="text: $parents[1].showDay($data, $parent)"></div>
+    </div>
+
+    <!-- /ko -->
+
 
 </div>

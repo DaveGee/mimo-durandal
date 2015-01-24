@@ -1,25 +1,21 @@
 /**
  * Created by david on 22.01.15.
  */
-define(['moment', 'knockout'], function(moment, ko) {
+define(['moment', 'knockout', 'services/formatter'], function (moment, ko, formatSvc) {
 
-  var formats = {
-    'monthName': function(value) {
-      return moment({month: value}).format('MMMM');
-    }
-  };
+    ko.bindingHandlers.format = {
+        init: function (el, valueAccessor, allBindings) {
 
-  ko.bindingHandlers.format = {
-    init: function(el, valueAccessor, allBindings) {
+            var value = allBindings().value,
+                format = valueAccessor() || 'noformat';
 
-      var value = allBindings().value;
 
-      $(el).text(formats[valueAccessor()](value));
-    },
+            $(el).text(formatSvc[format](value));
+        },
 
-    update: function(el, valueAccessor, allBindings) {
+        update: function (el, valueAccessor, allBindings) {
 
-    }
-  };
+        }
+    };
 
 });
