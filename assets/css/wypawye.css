@@ -1,0 +1,16 @@
+.year-view h1 {
+  text-align: center;
+}
+.month .loader {
+  text-align: center;
+}
+.month .dates,
+.month .weekday-name {
+  font-size: 0.75em;
+  text-align: center;
+  line-height: 3em;
+}
+.month .dates a:hover,
+.month .weekday-name a:hover {
+  background: #5bc0de;
+}

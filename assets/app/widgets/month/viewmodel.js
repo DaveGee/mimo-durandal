@@ -1,9 +1,8 @@
-define(['moment', 'dge/iterator'], function (moment, Iterator) {
+define(['moment', 'q', 'plugins/observable'], function (moment, Q, observable) {
 
     var monthWidget = function () {
         this.month = moment();
         this.days = [];
-        this.daysEnum = null;
 
         this.daysInWeek = [0, 1, 2, 3, 4, 5, 6];
         this.weeksInMonth = [0, 1, 2, 3, 4];
@@ -21,29 +20,34 @@ define(['moment', 'dge/iterator'], function (moment, Iterator) {
             year: this.year,
             month: this.monthNb
         });
+        var day = this.month.clone().startOf('month'),
+            dayEnd = this.month.clone().endOf('month');
 
-        var day = this.month.startOf('month').clone(),
-            dayEnd = this.month.endOf('month').clone();
+        var firstDayId = day.weekday(),
+            i = 0;
 
         while (!day.isAfter(dayEnd, 'day')) {
-            this.days.push(day.clone());
+            var dayId = firstDayId + i++;
+
+            this.days[dayId] = day.clone();
+
             day.add(1, 'd');
         }
-
-        this.daysEnum = new Iterator(this.days);
     };
 
-    monthWidget.prototype.showDay = function(dayOfWeek, weekOfMonth) {
+    monthWidget.prototype.showDay = function (dayId) {
 
-        var day = this.daysEnum.current();
-
-        if(day && day.weekday() === dayOfWeek) {
-            this.daysEnum.next();
-            return day.date();
+        if(this.days[dayId]) {
+            return this.days[dayId].date();
         } else {
-            return '-';
+            return '';
         }
+    };
 
+    monthWidget.prototype.dateClick = function(dayId) {
+        var day = this.days[dayId];
+
+        alert(day.format('DD.MM.YYYY'));
     };
 
     return monthWidget;

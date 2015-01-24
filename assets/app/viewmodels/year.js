@@ -1,7 +1,12 @@
-define([], function() {
-  var year = function () {
-      this.year = 2015;
-  };
+define(['services/budget'], function (budgetSvc) {
+    var year = function () {
 
-  return year;
+
+    };
+
+    year.prototype.activate = function() {
+        this.currentBudget = budgetSvc.getForYear(2015);
+    };
+
+    return year;
 });

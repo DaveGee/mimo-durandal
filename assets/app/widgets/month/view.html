@@ -1,17 +1,16 @@
-<div>
+<div class="month">
     <h2 data-bind="value: monthNb, format: 'monthName'"></h2>
 
     <div class="row" data-bind="foreach: daysInWeek">
-        <div class="col-sm-12" data-bind="value: $data, format: 'dayNameShort'"></div>
+        <div class="weekday-name hidden-xs col-xs-12" data-bind="value: $data, format: 'dayNameShort'"></div>
     </div>
 
     <!-- ko foreach: weeksInMonth -->
 
-    <div class="row" data-bind="foreach: $parent.daysInWeek">
-        <div class="col-sm-12" data-bind="text: $parents[1].showDay($data, $parent)"></div>
+    <div class="row dates" data-bind="foreach: $parent.daysInWeek">
+        <a href="#" class="col-xs-12" data-bind="click: $parents[1].dateClick.bind($parents[1], $data + $parent * 7),
+                text: $parents[1].showDay($data + $parent * 7)"></a>
     </div>
 
     <!-- /ko -->
-
-
 </div>
