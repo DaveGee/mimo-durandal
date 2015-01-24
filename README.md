@@ -1,3 +1,3 @@
-# wypawye
+# What You Pay and What you Earn
 
-a [Sails](http://sailsjs.org) application
+I'm a readme file for a nice little application built on SailsJS and DurandalJS

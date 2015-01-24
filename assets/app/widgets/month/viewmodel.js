@@ -1,4 +1,4 @@
-define(['moment', 'q', 'plugins/observable'], function (moment, Q, observable) {
+define(['moment', 'dialogs/addExpense', 'plugins/dialog'], function (moment, ExpenseDialog, dialog) {
 
     var monthWidget = function () {
         this.month = moment();
@@ -47,7 +47,7 @@ define(['moment', 'q', 'plugins/observable'], function (moment, Q, observable) {
     monthWidget.prototype.dateClick = function(dayId) {
         var day = this.days[dayId];
 
-        alert(day.format('DD.MM.YYYY'));
+        dialog.show(new ExpenseDialog());
     };
 
     return monthWidget;
