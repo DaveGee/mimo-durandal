@@ -1,10 +1,9 @@
-define(['plugins/dialog'], function(dialog) {
+define(['plugins/dialog', 'bootstrap'], function(dialog) {
 
-    var ExpenseDialog = function(moneyType, date) {
+    var ExpenseDialog = function(date) {
         this.autoclose = true;
 
         this.date = date;
-        this.moneyType = moneyType;
     };
 
     ExpenseDialog.prototype.close = function() {

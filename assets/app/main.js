@@ -19,36 +19,39 @@
     }
 });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'conf', 'q'], function (system, app, viewLocator, conf, Q) {
-    //>>excludeStart("build", true);
-    system.debug(true);
-    //>>excludeEnd("build");
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'conf', 'q', 'durandal/composition'],
+    function (system, app, viewLocator, conf, Q, composition) {
+        //>>excludeStart("build", true);
+        system.debug(true);
+        //>>excludeEnd("build");
 
-    app.title = 'WYPAWYE';
+        app.title = 'WYPAWYE';
 
-    app.configurePlugins({
-        router: true,
-        dialog: true,
-        observable: true,
-        widget: true
-    });
+        app.configurePlugins({
+            router: true,
+            dialog: true,
+            observable: true,
+            widget: true
+        });
 
-    system.defer = function (action) {
-        var deferred = Q.defer();
-        action.call(deferred, deferred);
-        var promise = deferred.promise;
-        deferred.promise = function () {
-            return promise;
+        system.defer = function (action) {
+            var deferred = Q.defer();
+            action.call(deferred, deferred);
+            var promise = deferred.promise;
+            deferred.promise = function () {
+                return promise;
+            };
+            return deferred;
         };
-        return deferred;
-    };
 
-    app.start().then(function () {
-        //Replace 'viewmodels' in the moduleId with 'views' to locate the view.
-        //Look for partial views in a 'views' folder in the root.
-        viewLocator.useConvention();
+        composition.addBindingHandler('hasFocus');
 
-        //Show the app by setting the root view model for our application with a transition.
-        app.setRoot('viewmodels/shell');//, 'entrance');
+        app.start().then(function () {
+            //Replace 'viewmodels' in the moduleId with 'views' to locate the view.
+            //Look for partial views in a 'views' folder in the root.
+            viewLocator.useConvention();
+
+            //Show the app by setting the root view model for our application with a transition.
+            app.setRoot('viewmodels/shell');//, 'entrance');
+        });
     });
-});
