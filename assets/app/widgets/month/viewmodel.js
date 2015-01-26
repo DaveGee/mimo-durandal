@@ -1,4 +1,5 @@
-define(['moment', 'dialogs/addExpense', 'plugins/dialog'], function (moment, ExpenseDialog, dialog) {
+define(['moment', 'dialogs/addExpense', 'plugins/dialog', 'jquery', 'bootstrap'],
+    function (moment, ExpenseDialog, dialog, $, bootstrap) {
 
     var monthWidget = function () {
         this.month = moment();
@@ -48,6 +49,10 @@ define(['moment', 'dialogs/addExpense', 'plugins/dialog'], function (moment, Exp
         var day = this.days[dayId];
 
         dialog.show(new ExpenseDialog());
+    };
+
+    monthWidget.prototype.compositionComplete = function(view) {
+        $('a', view).popover();
     };
 
     return monthWidget;

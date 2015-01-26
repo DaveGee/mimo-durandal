@@ -10290,6 +10290,6 @@ input[type="checkbox"] {
 .panel-default .close {
   color: #222222;
 }
-.modal .close {
+.modal-content .close {
   color: #222222;
 }
