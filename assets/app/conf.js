@@ -12,7 +12,7 @@ define(['moment'], function(moment) {
   return {
     app: {
       version: '0.1',
-      name: 'WYPAWYE'
+      name: 'MiMo'
     }
 
   };

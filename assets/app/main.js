@@ -25,7 +25,7 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'conf', 'q', 
         system.debug(true);
         //>>excludeEnd("build");
 
-        app.title = 'WYPAWYE';
+        app.title = 'MiMo';
 
         app.configurePlugins({
             router: true,
