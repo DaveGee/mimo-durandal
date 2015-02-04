@@ -1,5 +1,5 @@
-define(['moment', 'dialogs/dayExpenses', 'plugins/dialog'],
-    function (moment, ExpenseDialog, dialog) {
+define(['moment', 'dialogs/dayModal', 'plugins/dialog'],
+    function (moment, DayModal, dialog) {
 
     var monthWidget = function () {
         this.month = moment();
@@ -48,7 +48,7 @@ define(['moment', 'dialogs/dayExpenses', 'plugins/dialog'],
     monthWidget.prototype.dateClick = function(dayId) {
         var day = this.days[dayId];
 
-        dialog.show(new ExpenseDialog(day));
+        dialog.show(new DayModal(day));
     };
 
     return monthWidget;

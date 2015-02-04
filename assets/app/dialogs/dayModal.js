@@ -4,6 +4,13 @@ define(['plugins/dialog', 'bootstrap'], function(dialog) {
         this.autoclose = true;
 
         this.date = date;
+
+        this.moneyUnit = {
+            amount: null,
+            type: 'debit',
+            isMonthly: false,
+            description: null
+        };
     };
 
     ExpenseDialog.prototype.close = function() {
