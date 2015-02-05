@@ -8,7 +8,7 @@
         'knockout': '../lib/knockout/knockout-3.1.0',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
         'jquery': '../lib/jquery/jquery-1.9.1',
-        'moment': '../lib/moment/moment-with-locales',
+        'moment': '../lib/moment-with-locales/index',
         'q': '../lib/q/q'
     },
     shim: {

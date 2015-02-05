@@ -1,0 +1,13 @@
+{
+  "name": "moment-with-locales",
+  "_cacheHeaders": {
+    "ETag": "\"202450ae3dcce609dd955220e4132af08dbb0ad2\"",
+    "Content-Length": "348978",
+    "Content-Type": "text/plain; charset=utf-8"
+  },
+  "_release": "e-tag:202450ae3",
+  "main": "index.js",
+  "_source": "https://raw.githubusercontent.com/moment/moment/develop/min/moment-with-locales.js",
+  "_target": "*",
+  "_originalSource": "https://raw.githubusercontent.com/moment/moment/develop/min/moment-with-locales.js"
+}

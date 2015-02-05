@@ -1,3 +1,3 @@
-# What You Pay and What you Earn
+# Money in Money out
 
-I'm a readme file for a nice little application built on SailsJS and DurandalJS
+I'm a readme

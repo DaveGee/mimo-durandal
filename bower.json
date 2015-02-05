@@ -1,0 +1,13 @@
+{
+  "name": "mimo-durandal",
+  "version": "0.1",
+  "homepage": "https://github.com/DaveGee/wypawye",
+  "authors": [
+    "David <david.geretti@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "moment-with-locales": "https://raw.githubusercontent.com/moment/moment/develop/min/moment-with-locales.js"
+  }
+}
