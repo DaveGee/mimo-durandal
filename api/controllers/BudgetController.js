@@ -7,7 +7,7 @@
 
 module.exports = {
 
-    create: function (req, res) {
+    create2: function (req, res) {
         var params = req.params.all();
 
         Budget.create({

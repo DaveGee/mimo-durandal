@@ -1,20 +1,22 @@
+define(['moment'], function (moment) {
 
-define(['moment'], function(moment) {
+    // add custom bindings
+    require(['bindings/formatter']);
 
-  // add custom bindings
-  require(['bindings/formatter']);
+    // configure application
+    moment.locale('fr-CH');
 
-  // configure application
-  moment.locale('fr-CH');
+    // return app config
 
-  // return app config
+    return {
+        app: {
+            version: '0.1',
+            name: 'MiMo'
+        },
 
-  return {
-    app: {
-      version: '0.1',
-      name: 'MiMo'
-    }
-
-  };
+        api: {
+            url: 'http://localhost:1337'
+        }
+    };
 
 });

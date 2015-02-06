@@ -15,6 +15,11 @@ module.exports = {
       owner: {
           type: 'string',
           defaultsTo: ''
+      },
+
+      money: {
+          collection: 'moneyunit',
+          via: 'budget'
       }
   }
 };

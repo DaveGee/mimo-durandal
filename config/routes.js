@@ -32,11 +32,11 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-    '/': {
-        view: 'index'
-    },
+    //'/': {
+    //    view: 'index'
+    //},
 
-    'post /api/Budget': 'BudgetController.create'
+    //'post /api/Budget': 'BudgetController.create'
 
     /***************************************************************************
      *                                                                          *
