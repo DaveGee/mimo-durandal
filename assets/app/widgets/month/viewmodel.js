@@ -15,7 +15,8 @@ define(['moment', 'dialogs/dayModal', 'plugins/dialog'],
 
     monthWidget.prototype.activate = function (settings) {
         this.monthNb = Math.min(settings.month, 11);
-        this.year = settings.year || moment().year();
+        this.budget = settings.budget || {};
+        this.year = this.budget.year || moment().year();
 
         this.month = moment({
             year: this.year,
@@ -48,7 +49,7 @@ define(['moment', 'dialogs/dayModal', 'plugins/dialog'],
     monthWidget.prototype.dateClick = function(dayId) {
         var day = this.days[dayId];
 
-        dialog.show(new DayModal(day));
+        dialog.show(new DayModal(this.budget, day));
     };
 
     return monthWidget;

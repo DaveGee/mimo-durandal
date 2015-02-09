@@ -57,12 +57,13 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
   mimoMongoDbServer: {
-    adapter: 'sails-mongo',
+    adapter: 'sails-memory'
+    /*adapter: 'sails-mongo',
     host: 'ds061558.mongolab.com:61558',
     port: 27017,
     user: 'mimo',
     password: 'bGi7VteTFmtQ7p',
-    database: 'mimodb'
+    database: 'mimodb'*/
   },
 
   /***************************************************************************
