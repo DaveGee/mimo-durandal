@@ -14,12 +14,12 @@ define(['plugins/dialog', 'bootstrap', 'services/budget'], function (dialog, boo
             description: null,
             date: date.format('YYYY-MM-DD')
         };
-
-        console.log(budget);
     };
 
     ExpenseDialog.prototype.add = function () {
-        this.budget.addMoney(this.moneyUnit);
+        this.budget.addMoney(this.moneyUnit).then(function() {
+            console.log('budget', this.budget)
+        }.bind(this));
     };
 
     ExpenseDialog.prototype.close = function () {

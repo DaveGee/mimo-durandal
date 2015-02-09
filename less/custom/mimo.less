@@ -16,12 +16,21 @@
 
   }
   .dates, .weekday-name {
-    font-size: 0.75em;
     text-align: center;
     line-height: 3em;
+    font-size: 0.75em;
 
+    .has-money {
+      font-style: italic;
+    }
+
+    a, a:visited {
+      color: @text-color;
+    }
     a:hover {
       background: @brand-info;
+      color: white;
+      text-decoration: none;
     }
   }
 }

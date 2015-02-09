@@ -4,11 +4,11 @@ define(['q'], function(Q) {
 
     var dataService = {
         getBudgetForYear: function(year) {
-            return Q({ year: year, owner: user, money: [] });
+            return Q({ year: year, owner: user, money: {} });
         },
 
-        addMoneyToBudget: function(budgetId, amount, type) {
-            return Q({ amount: amount, type: type });
+        addMoneyToBudget: function(budgetId, amount, type, date) {
+            return Q({ amount: amount, type: type, date: date });
         }
     };
 

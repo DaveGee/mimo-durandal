@@ -15,10 +15,11 @@ define(['q', 'moment', 'services/dataservice'], function (Q, moment, ds) {
         budget.addMoney = function(moneyUnit) {
 
             //try to add it to sails
-            ds.addMoneyToBudget(budget.id, moneyUnit.amount, moneyUnit.type).then(function(mu) {
+            return ds.addMoneyToBudget(budget.id, moneyUnit.amount, moneyUnit.type).then(function(mu) {
 
                 // add money to cached object on which durandal binds ?
-                budget.money.push(mu);
+                budget.money[moneyUnit.date] = mu;
+
 
                 // show toast
             });

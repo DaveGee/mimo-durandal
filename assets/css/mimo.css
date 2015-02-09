@@ -6,13 +6,25 @@
 }
 .month .dates,
 .month .weekday-name {
-  font-size: 0.75em;
   text-align: center;
   line-height: 3em;
+  font-size: 0.75em;
+}
+.month .dates .has-money,
+.month .weekday-name .has-money {
+  font-style: italic;
+}
+.month .dates a,
+.month .weekday-name a,
+.month .dates a:visited,
+.month .weekday-name a:visited {
+  color: #222222;
 }
 .month .dates a:hover,
 .month .weekday-name a:hover {
   background: #5bc0de;
+  color: white;
+  text-decoration: none;
 }
 footer {
   font-size: 0.75em;
