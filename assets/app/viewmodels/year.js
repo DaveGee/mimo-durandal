@@ -1,11 +1,10 @@
 define(['services/budget'], function (budgetSvc) {
     var year = function () {
-
-
+        this.currentBudget = budgetSvc.get();
     };
 
     year.prototype.activate = function() {
-        this.currentBudget = budgetSvc.getForYear(2015);
+
     };
 
     return year;
