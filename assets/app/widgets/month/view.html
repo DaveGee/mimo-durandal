@@ -8,11 +8,13 @@
     <!-- ko foreach: weeksInMonth -->
 
     <div class="row dates" data-bind="foreach: $parent.daysInWeek">
+        <!-- ko with: $parents[1].days[$data + $parent * 7] -->
         <a href="#" class="col-xs-12"
-           data-bind="click: $parents[1].dateClick.bind($parents[1], $data + $parent * 7),
-                        text: $parents[1].days[$data + $parent * 7],
-                        css: { 'has-money': $parents[1].getMoneyForDay($data + $parent * 7)}">
+           data-bind="click: dayClick,
+                    text: $data.day,
+                    css: { 'has-money': $data.hasMoney }">
         </a>
+        <!-- /ko -->
     </div>
 
     <!-- /ko -->

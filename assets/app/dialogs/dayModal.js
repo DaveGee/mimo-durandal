@@ -18,7 +18,7 @@ define(['plugins/dialog', 'bootstrap', 'services/budget'], function (dialog, boo
 
     ExpenseDialog.prototype.add = function () {
         this.budget.addMoney(this.moneyUnit).then(function() {
-            console.log('budget', this.budget)
+            console.log('budget', this.budget);
         }.bind(this));
     };
 

@@ -6,7 +6,7 @@ define(['moment', 'dialogs/dayModal', 'plugins/dialog'],
             this.days = [];
 
             this.daysInWeek = [0, 1, 2, 3, 4, 5, 6];
-            this.weeksInMonth = [0, 1, 2, 3, 4];
+            this.weeksInMonth = [0, 1, 2, 3, 4, 5];
 
             this.monthNb = this.month.month();
             this.year = this.month.year();
@@ -26,28 +26,34 @@ define(['moment', 'dialogs/dayModal', 'plugins/dialog'],
                 dayEnd = this.month.clone().endOf('month').date(),
                 i = 0;
 
-            while (i <= dayEnd) {
-                var dayId = firstDayId + i++;
+            var self = this;
+            var dayClick = function (dayData) {
+                dialog.show(new DayModal(self.budget, moment({
+                        date: dayData.day,
+                        month:self.monthNb,
+                        year: self.year
+                    }
+                )));
+            };
 
-                this.days[dayId] = i;
+            while (i < 42) {
+
+                if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
+                    this.days[i] = {
+                        day: i - firstDayId + 1,
+                        hasMoney: false,
+                        dayClick: dayClick
+                    };
+                } else {
+                    this.days[i] = {
+                        day: '',
+                        hasMoney: false,
+                        dayClick: function() {}
+                    };
+                }
+
+                i++;
             }
-        };
-
-        monthWidget.prototype.getMoneyForDay = function (dayId) {
-
-            var date = this.month.format('YYYY-MM-') + dayId;
-
-            return this.budget.money[date];
-        };
-
-        monthWidget.prototype.dateClick = function (dayId) {
-            var day = this.days[dayId];
-
-            dialog.show(new DayModal(this.budget, moment({
-                date: day,
-                month: this.monthNb,
-                year: this.year
-            })));
         };
 
         return monthWidget;
