@@ -3,7 +3,7 @@
         <div class="col-sm-42 ">
             <div class="form-group has-feedback">
                 <label class="control-label sr-only" for="montant">Montant</label>
-                <input type="text" class="form-control" id="montant" placeholder="Montant" data-bind="value: moneyUnit.amount">
+                <input type="text" class="form-control" id="montant" placeholder="Montant" data-bind="value: amount">
                 <span class="glyphicon glyphicon-ok form-control-feedback" data-bind="visible: false"></span>
             </div>
         </div>
@@ -13,7 +13,7 @@
         <div class="col-sm-84">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="isMonthly" value="monthly" data-bind="checked: moneyUnit.isMonthly">
+                    <input type="checkbox" id="isMonthly" value="monthly" data-bind="checked: isMonthly">
                     Mensuel
                 </label>
             </div>
@@ -24,7 +24,7 @@
         <div class="col-sm-42">
             <div class="radio">
                 <label>
-                    <input type="radio" name="moveType" id="moveDebit" value="debit" data-bind="checked: moneyUnit.type">
+                    <input type="radio" name="moveType" id="moveDebit" value="debit" data-bind="checked: type">
                     Débit (le truc que tu paie)
                 </label>
             </div>
@@ -32,7 +32,7 @@
         <div class="col-sm-42">
             <div class="radio">
                 <label>
-                    <input type="radio" name="moveType" id="moveCredit" value="credit" data-bind="checked: moneyUnit.type">
+                    <input type="radio" name="moveType" id="moveCredit" value="credit" data-bind="checked: type">
                     Crédit (argent que tu reçois)
                 </label>
             </div>
@@ -44,9 +44,15 @@
 
             <div class="form-group has-feedback">
                 <label class="control-label sr-only" for="description">Description</label>
-                <input type="text" class="form-control" id="description" placeholder="Description" data-bind="value: moneyUnit.description">
+                <input type="text" class="form-control" id="description" placeholder="Description" data-bind="value: description">
                 <span class="glyphicon glyphicon-ok form-control-feedback" data-bind="visible: false"></span>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-84">
+            <button class="btn btn-default pull-right btn-sm" data-bind="click: addMoney">Ajouter de l'argent</button>
         </div>
     </div>
 

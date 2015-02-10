@@ -19,12 +19,12 @@
 .month .dates a:visited,
 .month .weekday-name a:visited {
   color: #222222;
+  text-decoration: none;
 }
 .month .dates a:hover,
 .month .weekday-name a:hover {
   background: #5bc0de;
   color: white;
-  text-decoration: none;
 }
 footer {
   font-size: 0.75em;

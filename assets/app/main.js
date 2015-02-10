@@ -19,6 +19,8 @@
     }
 });
 
+var widgets = ['month'];
+
 define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'conf', 'q', 'durandal/composition'],
     function (system, app, viewLocator, conf, Q, composition) {
         //>>excludeStart("build", true);
@@ -31,7 +33,7 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'conf', 'q', 
             router: true,
             dialog: true,
             observable: true,
-            widget: true
+            widget: {kinds : widgets}
         });
 
         system.defer = function (action) {

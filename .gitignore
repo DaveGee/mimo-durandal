@@ -81,6 +81,7 @@ assets/vendor
 ################################################
 .tmp
 dump.rdb
+config/env/development.js
 
 
 

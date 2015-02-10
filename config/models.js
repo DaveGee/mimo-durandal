@@ -17,8 +17,8 @@ module.exports.models = {
      * connections (see `config/connections.js`)                                *
      *                                                                          *
      ***************************************************************************/
-    //connection: 'mimoMongoDbServer',
-    connection: 'mimoMemory',
+    connection: 'mimoMongoDbServer',
+    //connection: 'mimoMemory',
 
     /***************************************************************************
      *                                                                          *

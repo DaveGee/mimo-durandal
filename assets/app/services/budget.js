@@ -12,18 +12,10 @@ define(['q', 'moment', 'services/dataservice'], function (Q, moment, ds) {
             throw "Budget not valid";
         }
 
-        budget.addMoney = function (dateStr, amount, type, description, isMonthly) {
+        budget.addMoney = function (dateObj, amount, type, description, isMonthly) {
 
             //try to add it to sails
-            return ds.addMoneyToBudget(budget.id, amount, type)
-                .then(function (moneyObj) {
-
-                    // add money to cached object on which durandal binds ?
-                    budget.money[dateStr] = moneyObj;
-
-
-                    // show toast
-                });
+            return ds.addMoneyToBudget(budget.id, dateObj.format('YYYY-MM-DD'), amount, type, description, isMonthly);
         };
     }
 

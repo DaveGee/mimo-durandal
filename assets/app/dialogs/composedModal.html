@@ -1,0 +1,13 @@
+<div class="modal-content add-expense-modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-bind="click: close" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" data-bind="text: title">Modal title</h4>
+    </div>
+    <div class="modal-body">
+        <div data-bind="compose: target"></div>
+    </div>
+    <div class="modal-footer" data-bind="foreach: buttons, visible: buttons">
+        <button type="button" class="btn btn-default" data-bind="click: $parent.action.bind($parent, $data), text: label"></button>
+    </div>
+</div><!-- /.modal-content -->
