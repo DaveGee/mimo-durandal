@@ -1,8 +1,8 @@
-define(['services/budget', 'dialogs/composedModal', 'plugins/dialog', 'viewmodels/formAddMoney'],
-    function (budgetSvc, ComposedModal, dialog, FormAddMoney) {
+define(['services/dataservice', 'dialogs/composedModal', 'plugins/dialog', 'viewmodels/formAddMoney'],
+    function (ds, ComposedModal, dialog, FormAddMoney) {
 
         var year = function () {
-            this.currentBudget = budgetSvc.get();
+            this.currentBudget = ds.getBudgetForYear(2015);
         };
 
         year.prototype.activate = function () {
@@ -13,7 +13,7 @@ define(['services/budget', 'dialogs/composedModal', 'plugins/dialog', 'viewmodel
 
             var form = new FormAddMoney(function (moneyUnit) {
 
-                this.currentBudget.addMoney(
+                ds.addMoneyToBudget(this.currentBudget.id,
                     date,
                     moneyUnit.amount,
                     moneyUnit.type,

@@ -4,6 +4,7 @@ define(['q'], function(Q) {
 
     var dataService = {
         getBudgetForYear: function(year) {
+
             return Q({ year: year, owner: user, money: {} });
         },
 
