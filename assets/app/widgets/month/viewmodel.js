@@ -13,6 +13,17 @@ define(['moment', 'dialogs/dayModal', 'plugins/dialog'],
 
         };
 
+        monthWidget.prototype.addMoney = function(moneyUnit) {
+
+            //TODO: find a way for the callback to call here (this problem)
+            console.log(this.budget);
+
+            this.budget.addMoney(moneyUnit.date, moneyUnit.amount, moneyUnit.type, moneyUnit.description, moneyUnit.isMonthly)
+                .then(function() {
+                    console.log(this.budget);
+                }.bind(this));
+        };
+
         monthWidget.prototype.activate = function (settings) {
             this.monthNb = Math.min(settings.month, 11);
             this.budget = settings.budget || {};
@@ -28,12 +39,13 @@ define(['moment', 'dialogs/dayModal', 'plugins/dialog'],
 
             var self = this;
             var dayClick = function (dayData) {
-                dialog.show(new DayModal(self.budget, moment({
+                dialog.show(new DayModal(moment({
                         date: dayData.day,
-                        month:self.monthNb,
+                        month: self.monthNb,
                         year: self.year
-                    }
-                )));
+                    }),
+                    self.addMoney.bind(this)
+                ));
             };
 
             while (i < 42) {

@@ -8,21 +8,22 @@ define(['q', 'moment', 'services/dataservice'], function (Q, moment, ds) {
      * @param budget
      */
     function init(budget) {
-        if(!budget) {
+        if (!budget) {
             throw "Budget not valid";
         }
 
-        budget.addMoney = function(moneyUnit) {
+        budget.addMoney = function (dateStr, amount, type, description, isMonthly) {
 
             //try to add it to sails
-            return ds.addMoneyToBudget(budget.id, moneyUnit.amount, moneyUnit.type).then(function(mu) {
+            return ds.addMoneyToBudget(budget.id, amount, type)
+                .then(function (moneyObj) {
 
-                // add money to cached object on which durandal binds ?
-                budget.money[moneyUnit.date] = mu;
+                    // add money to cached object on which durandal binds ?
+                    budget.money[dateStr] = moneyObj;
 
 
-                // show toast
-            });
+                    // show toast
+                });
         };
     }
 

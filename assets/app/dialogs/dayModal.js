@@ -1,11 +1,15 @@
-define(['plugins/dialog', 'bootstrap', 'services/budget'], function (dialog, bootstrap, budgetSvc) {
+define(['plugins/dialog', 'bootstrap'], function (dialog, bootstrap) {
 
-    var ExpenseDialog = function (budget, date) {
+    var ExpenseDialog = function (date, addMoneyCb) {
         this.autoclose = true;
 
         this.date = date;
 
-        this.budget = budget;
+        if(typeof addMoneyCb !== 'function') {
+            throw "No valid callback method for modal";
+        }
+
+        this.addMoneyCb = addMoneyCb;
 
         this.moneyUnit = {
             amount: null,
@@ -17,9 +21,8 @@ define(['plugins/dialog', 'bootstrap', 'services/budget'], function (dialog, boo
     };
 
     ExpenseDialog.prototype.add = function () {
-        this.budget.addMoney(this.moneyUnit).then(function() {
-            console.log('budget', this.budget);
-        }.bind(this));
+
+        this.addMoneyCb(this.moneyUnit);
     };
 
     ExpenseDialog.prototype.close = function () {
