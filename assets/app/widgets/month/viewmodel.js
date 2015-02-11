@@ -23,7 +23,7 @@ define(['moment', 'q'],
                 throw "Select undefined";
             };
 
-            this.money = settings.money;
+            this.money = settings.money || {};
 
             return this.initCalendar();
         };
@@ -46,9 +46,12 @@ define(['moment', 'q'],
 
                     if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
 
+                        var day = i - firstDayId + 1;
+                        var dayStr = thisMonth.date(day).format('YYYY-MM-DD');
+
                         this.days[i] = {
-                            day: i - firstDayId + 1,
-                            hasMoney: false,
+                            day: day,
+                            hasMoney: !!this.money[dayStr],
                             dayClick: function () {
                                 callback(moment({
                                     month: thisMonth.month(),

@@ -1,6 +1,7 @@
 define(['q'], function (Q) {
 
     var user = 'dge';
+    var mockBudget = {};
 
     var dataService = {
         getBudgetForYear: function (year) {

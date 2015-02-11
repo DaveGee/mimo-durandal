@@ -18,7 +18,7 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-      connection: 'mimoMongoDbServer'
+      connection: 'mimoMemory'
   }
 
 };

@@ -12,7 +12,8 @@
 }
 .month .dates .has-money,
 .month .weekday-name .has-money {
-  font-style: italic;
+  color: #f04124;
+  font-weight: bold;
 }
 .month .dates a,
 .month .weekday-name a,
