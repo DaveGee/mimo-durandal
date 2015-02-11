@@ -1,0 +1,23 @@
+
+
+        year.prototype.initMonthsData = function (budget) {
+
+            for(var m in budget.money) {
+                var mu = budget.money[m];
+
+                var muDate = moment(mu.date);
+                mu._date = muDate;
+
+                var mo = muDate.month();
+
+                if(!this.monthsMoney[mo]) {
+                    this.monthsMoney[mo] = {};
+                }
+
+                if(!this.monthsMoney[mo][mu.date]) {
+                    this.monthsMoney[mo][mu.date] = [];
+                }
+
+                this.monthsMoney[mo][mu.date].push(mu);
+            }
+        };

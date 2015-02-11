@@ -1,5 +1,5 @@
-define(['moment'],
-    function (moment) {
+define(['moment', 'q'],
+    function (moment, Q) {
 
         var monthWidget = function () {
             this.days = [];
@@ -19,9 +19,18 @@ define(['moment'],
             this.monthNb = Math.min(settings.monthNb, 11);
             this.year = settings.year || moment().year();
 
-            var callback = settings.select || function () {
-                    throw "Select undefined";
-                };
+            this.callback = settings.select || function () {
+                throw "Select undefined";
+            };
+
+            this.money = settings.money;
+
+            return this.initCalendar();
+        };
+
+        monthWidget.prototype.initCalendar = function() {
+
+            var callback = this.callback;
 
             var thisMonth = moment({
                 year: this.year,
@@ -32,31 +41,35 @@ define(['moment'],
                 dayEnd = thisMonth.clone().endOf('month').date(),
                 i = 0;
 
-            while (i < 42) {
+            return Q.fcall(function() {
+                while (i < 42) {
 
-                if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
-                    this.days[i] = {
-                        day: i - firstDayId + 1,
-                        hasMoney: false,
-                        dayClick: function () {
-                            callback(moment({
-                                month: thisMonth.month(),
-                                year: thisMonth.year(),
-                                date: this.day
-                            }));
-                        }
-                    };
-                } else {
-                    this.days[i] = {
-                        day: '',
-                        hasMoney: false,
-                        dayClick: function () {
-                        }
-                    };
+                    if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
+
+                        this.days[i] = {
+                            day: i - firstDayId + 1,
+                            hasMoney: false,
+                            dayClick: function () {
+                                callback(moment({
+                                    month: thisMonth.month(),
+                                    year: thisMonth.year(),
+                                    date: this.day
+                                }));
+                            }
+                        };
+
+                    } else {
+                        this.days[i] = {
+                            day: '',
+                            hasMoney: false,
+                            dayClick: function () {
+                            }
+                        };
+                    }
+
+                    i++;
                 }
-
-                i++;
-            }
+            }.bind(this));
         };
 
         return monthWidget;

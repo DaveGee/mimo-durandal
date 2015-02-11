@@ -1,12 +1,12 @@
-define(['services/dataservice', 'dialogs/composedModal', 'plugins/dialog', 'viewmodels/formAddMoney'],
-    function (ds, ComposedModal, dialog, FormAddMoney) {
+define(['services/dataservice', 'dialogs/composedModal', 'plugins/dialog', 'viewmodels/formAddMoney', 'moment'],
+    function (ds, ComposedModal, dialog, FormAddMoney, moment) {
 
         var year = function () {
+
+            this.monthsMoney = [];
+            this.balance = 0;
+
             this.currentBudget = ds.getBudgetForYear(2015);
-        };
-
-        year.prototype.activate = function () {
-
         };
 
         year.prototype.daySelect = function (date) {
