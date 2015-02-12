@@ -51,7 +51,7 @@ define(['moment', 'q'],
 
                         this.days[i] = {
                             day: day,
-                            hasMoney: !!this.money[dayStr],
+                            hasMoney: this.money[dayStr] && this.money[dayStr].length > 0,
                             dayClick: function () {
                                 callback(moment({
                                     month: thisMonth.month(),

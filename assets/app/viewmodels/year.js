@@ -19,10 +19,13 @@ define(['services/dataservice', 'dialogs/composedModal', 'plugins/dialog', 'view
                     moneyUnit.type,
                     moneyUnit.description,
                     moneyUnit.isMonthly
-                ).then(function (data) {
+                ).then(function (updateMonth) {
                         //TODO: show toast
-                        console.log(data);
-                    });
+
+                        this.currentBudget.money[updateMonth.id] = updateMonth;
+
+                        console.log(updateMonth);
+                    }.bind(this));
             }.bind(this));
 
             dialog.show(new ComposedModal(date.format('dd DD MMM YYYY'), form/*, [{label: 'Terminer', id: 'end'}]*/))

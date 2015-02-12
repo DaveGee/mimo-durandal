@@ -19,7 +19,6 @@
 .month .weekday-name a,
 .month .dates a:visited,
 .month .weekday-name a:visited {
-  color: #222222;
   text-decoration: none;
 }
 .month .dates a:hover,
