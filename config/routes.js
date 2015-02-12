@@ -36,7 +36,9 @@ module.exports.routes = {
     //    view: 'index'
     //},
 
-    //'post /api/Budget': 'BudgetController.create'
+    'post /Budget': 'BudgetController.create',
+    'post /Budget/addMoney': 'BudgetController.addMoneyToBudget',
+    'get  /Budget/getMoneyForMonth': 'BudgetController.moneyForMonth'
 
     /***************************************************************************
      *                                                                          *

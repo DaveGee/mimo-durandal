@@ -7,7 +7,7 @@
 
 module.exports = {
 
-    create2: function (req, res) {
+    create: function (req, res) {
         var params = req.params.all();
 
         Budget.create({
@@ -19,6 +19,28 @@ module.exports = {
                     notice: 'Created budget for ' + created.year + ' for user ' + created.owner
                 });
             });
+    },
+
+    addMoneyToBudget: function (req, res) {
+
+    },
+
+    moneyForMonth: function(req, res) {
+        var budgetId = req.params.all().id;
+        var month = req.params.all().month;
+        var year = req.params.all().year;
+
+        Budget.findOne({id: budgetId})
+            .populate('money', { day:  { '>': new Date('2015-02-01'), '<': new Date('2015-03-01') } })
+            .then(function(budget) {
+
+                console.log('ok', arguments);
+                res.json(budget);
+            })
+            .catch(function(err) {
+                console.log('err', err);
+                res.serverError();
+            })
     }
 };
 
