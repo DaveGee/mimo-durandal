@@ -5,6 +5,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var moment = require('moment');
+
 module.exports = {
 
     create: function (req, res) {
@@ -27,19 +29,25 @@ module.exports = {
 
     moneyForMonth: function(req, res) {
         var budgetId = req.params.all().id;
-        var month = req.params.all().month;
-        var year = req.params.all().year;
+        var month = req.params.all().month || moment().month();
+        var year = req.params.all().year || moment().year();
+
+        var m = moment({year: year, month: month});
+        var som = new Date(m.startOf('month').toDate()),
+            eom = new Date(m.endOf('month').toDate());
 
         Budget.findOne({id: budgetId})
-            .populate('money', { day:  { '>': new Date('2015-02-01'), '<': new Date('2015-03-01') } })
+            .populate('money', { day:  { '>': som, '<=': eom } })
             .then(function(budget) {
 
-                console.log('ok', arguments);
-                res.json(budget);
+                if(budget && budget.money) {
+                    res.json(budget.money);
+                } else {
+                    res.notFound();
+                }
             })
             .catch(function(err) {
-                console.log('err', err);
-                res.serverError();
+                res.serverError(err);
             })
     }
 };
