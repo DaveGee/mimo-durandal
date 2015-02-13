@@ -17,6 +17,11 @@ module.exports = {
             year: params.year
         })
             .exec(function createCB(err, created) {
+
+                if(err) {
+                    return res.serverError({err:'ERRRRRRRRRRRG!'});
+                }
+
                 return res.json({
                     notice: 'Created budget for ' + created.year + ' for user ' + created.owner
                 });

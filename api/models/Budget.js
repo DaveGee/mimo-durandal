@@ -10,11 +10,12 @@ module.exports = {
   attributes: {
       year: {
           type: 'integer',
-          defaultsTo: 2015
+          defaultsTo: 2015,
+          required: true
       },
       owner: {
           type: 'string',
-          defaultsTo: ''
+          required: true
       },
 
       money: {
