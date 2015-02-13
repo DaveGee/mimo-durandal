@@ -23,6 +23,23 @@ module.exports = {
             });
     },
 
+    get: function(req, res) {
+        var paras = req.params.all();
+
+        var budgetToFind = {
+            owner: params.owner,
+            year: params.year
+        };
+
+        Budget.findOrCreate(budgetToFind, budgetToFind)
+            .then(function(budget) {
+                res.json(budget);
+            })
+            .catch(function(err) {
+                res.serverError(err);
+            });
+    },
+
     addMoneyToBudget: function (req, res) {
 
     },
