@@ -15,17 +15,11 @@ module.exports = {
         Budget.create({
             owner: params.owner,
             year: params.year
-        })
-            .exec(function createCB(err, created) {
-
-                if(err) {
-                    return res.serverError({err:'ERRRRRRRRRRRG!'});
-                }
-
-                return res.json({
-                    notice: 'Created budget for ' + created.year + ' for user ' + created.owner
-                });
-            });
+        }).then(function(created) {
+            return res.json(created);
+        }).catch(function(err) {
+            return res.serverError(err);
+        });
     },
 
     get: function(req, res) {
@@ -47,20 +41,20 @@ module.exports = {
 
     addMoneyToBudget: function (req, res) {
 
+
     },
 
     moneyForMonth: function(req, res) {
         var budgetId = req.params.all().id;
         var month = req.params.all().month || moment().month();
-        var year = req.params.all().year || moment().year();
-
-        var m = moment({year: year, month: month});
-        var som = new Date(m.startOf('month').toDate()),
-            eom = new Date(m.endOf('month').toDate());
 
         Budget.findOne({id: budgetId})
-            .populate('money', { day:  { '>': som, '<=': eom } })
+            .populate('money', { monthId: month })
             .then(function(budget) {
+
+                budget.money.forEach(function(m){
+                    console.log(m.day, m.monthId());
+                });
 
                 if(budget && budget.money) {
                     res.json(budget.money);

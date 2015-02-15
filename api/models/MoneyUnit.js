@@ -5,6 +5,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
+var moment = require('moment');
+
 module.exports = {
 
     attributes: {
@@ -39,6 +41,6 @@ module.exports = {
         budget: {
             model: 'budget'
         }
+
     }
 };
-
