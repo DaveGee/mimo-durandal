@@ -17,6 +17,12 @@ module.exports = {
             defaultsTo: new Date()
         },
 
+        monthId: {
+            type: 'integer',
+            required: true,
+            defaultsTo: 0
+        },
+
         guessedAmount: {
             type: 'float',
             required: true
@@ -39,8 +45,24 @@ module.exports = {
         description: {type: 'string'},
 
         budget: {
-            model: 'budget'
+            model: 'budget',
+            required: true
         }
+    },
 
+    beforeCreate: function(values, cb) {
+        setMonth(values);
+        cb();
+    },
+
+    beforeUpdate: function(values, cb) {
+        setMonth(values);
+        cb();
     }
 };
+
+function setMonth(values) {
+    var date = moment(values.day);
+
+    values.monthId = date.month();
+}

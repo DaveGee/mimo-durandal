@@ -8,7 +8,8 @@
 var moment = require('moment');
 
 module.exports = {
-
+/*
+    // post /Budget
     create: function (req, res) {
         var params = req.params.all();
 
@@ -22,8 +23,10 @@ module.exports = {
         });
     },
 
-    get: function(req, res) {
-        var paras = req.params.all();
+    // get the budget, and creates one if necessary
+    // get  /Budget/:owner/:year
+    getOrCreate: function(req, res) {
+        var params = req.params.all();
 
         var budgetToFind = {
             owner: params.owner,
@@ -39,11 +42,17 @@ module.exports = {
             });
     },
 
+
+    // post /Budget/:id/addMoney
+    // content : date, amount
     addMoneyToBudget: function (req, res) {
+        var params = req.params.all();
 
-
+        Budget.findOne({id: params.id})
+            )
     },
 
+    // get  /Budget/:id/moneyForMonth/:month
     moneyForMonth: function(req, res) {
         var budgetId = req.params.all().id;
         var month = req.params.all().month || moment().month();
@@ -65,6 +74,6 @@ module.exports = {
             .catch(function(err) {
                 res.serverError(err);
             })
-    }
+    }*/
 };
 

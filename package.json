@@ -35,5 +35,9 @@
     "url": "git://github.com/davegee/mimo-durandal.git"
   },
   "author": "david",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "supertest": "^0.15.0"
+  }
 }
