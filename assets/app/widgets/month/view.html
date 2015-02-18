@@ -10,7 +10,7 @@
     <div class="row dates" data-bind="foreach: $parent.daysInWeek">
         <!-- ko with: $parents[1].days[$data + $parent * 7] -->
         <a href="#" class="col-xs-12"
-           data-bind="click: dayClick,
+           data-bind="click: $parents[2].dayClick.bind($parents[2], $data),
                     text: day,
                     css: { 'has-money': hasMoney }">
         </a>

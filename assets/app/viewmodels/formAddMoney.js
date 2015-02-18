@@ -9,7 +9,7 @@ define([], function () {
     };
 
     FormAddMoney.prototype.reset = function () {
-        this.amount = null;
+        this.guessedAmount = null;
         this.type = 'debit';
         this.isMonthly = false;
         this.description = null;
@@ -18,7 +18,7 @@ define([], function () {
     FormAddMoney.prototype.addMoney = function() {
 
         this.newMoneyCb({
-            amount: this.amount,
+            guessedAmount: this.guessedAmount,
             type: this.type,
             isMonthly: this.isMonthly,
             description: this.description

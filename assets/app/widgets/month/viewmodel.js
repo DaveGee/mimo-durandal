@@ -1,5 +1,5 @@
-define(['moment', 'q'],
-    function (moment, Q) {
+define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins/dialog', 'viewmodels/formAddMoney'],
+    function (moment, Q, ds, ComposedModal, dialog, FormAddMoney) {
 
         var monthWidget = function () {
             this.days = [];
@@ -7,33 +7,52 @@ define(['moment', 'q'],
             this.daysInWeek = [0, 1, 2, 3, 4, 5, 6];
             this.weeksInMonth = [0, 1, 2, 3, 4, 5];
 
+            this.money = {
+                // 'YYYY-MM-DD': [ { moneyUnit }, { moneyUnit } ]
+            };
+
         };
 
         monthWidget.prototype.dayClick = function (day) {
-            if (typeof this.callback === 'function') {
-                this.callback(this.monthNb, day);
-            }
+
+            var date = moment({ day: day.day, month: this.monthNb, year: this.budget.year });
+
+            var form = new FormAddMoney(function (moneyUnit) {
+
+                moneyUnit.day = date;
+
+                ds.addMoneyToBudget(this.budget.id, moneyUnit).then(function (moneyUnit) {
+                    //TODO: show toast
+                    if(!this.money[moneyUnit.day]) {
+                        this.money[moneyUnit.day] = [];
+                    }
+                    this.money[moneyUnit.day].push(moneyUnit);
+
+                }.bind(this));
+            }.bind(this));
+
+            dialog.show(new ComposedModal(date.format('dd DD MMM YYYY'), form/*, [{label: 'Terminer', id: 'end'}]*/))
+                .then(function (result) {
+                    //console.log(result);
+                });
         };
 
         monthWidget.prototype.activate = function (settings) {
             this.monthNb = Math.min(settings.monthNb, 11);
-            this.year = settings.year || moment().year();
+            this.budget = settings.budget;
+            if(!this.budget) {
+                throw 'No budget, no chocolate!';
+            }
 
-            this.callback = settings.select || function () {
-                throw "Select undefined";
-            };
-
-            this.money = settings.money || {};
+            this.callback = settings.select || function () {};
 
             return this.initCalendar();
         };
 
         monthWidget.prototype.initCalendar = function() {
 
-            var callback = this.callback;
-
             var thisMonth = moment({
-                year: this.year,
+                year: this.budget.year,
                 month: this.monthNb
             });
 
@@ -51,22 +70,13 @@ define(['moment', 'q'],
 
                         this.days[i] = {
                             day: day,
-                            hasMoney: this.money[dayStr] && this.money[dayStr].length > 0,
-                            dayClick: function () {
-                                callback(moment({
-                                    month: thisMonth.month(),
-                                    year: thisMonth.year(),
-                                    date: this.day
-                                }));
-                            }
+                            hasMoney: this.money[dayStr] && this.money[dayStr].length > 0
                         };
 
                     } else {
                         this.days[i] = {
                             day: '',
-                            hasMoney: false,
-                            dayClick: function () {
-                            }
+                            hasMoney: false
                         };
                     }
 

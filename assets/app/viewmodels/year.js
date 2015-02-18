@@ -13,16 +13,12 @@ define(['services/dataservice', 'dialogs/composedModal', 'plugins/dialog', 'view
 
             var form = new FormAddMoney(function (moneyUnit) {
 
-                ds.addMoneyToBudget(this.currentBudget.id,
-                    date,
-                    moneyUnit.amount,
-                    moneyUnit.type,
-                    moneyUnit.description,
-                    moneyUnit.isMonthly
-                ).then(function (updateMonth) {
+                moneyUnit.day = date;
+
+                ds.addMoneyToBudget(this.currentBudget.id, moneyUnit).then(function () {
                         //TODO: show toast
 
-                        this.currentBudget.money[updateMonth.id] = updateMonth;
+                        this.currentBudget.money[moneyUnit.day.format('YYYY-MM-DD')];
 
                         console.log(updateMonth);
                     }.bind(this));
