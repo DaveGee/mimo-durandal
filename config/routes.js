@@ -35,6 +35,9 @@ module.exports.routes = {
     //'/': {
     //    view: 'index'
     //},
+
+    'get /budget/:owner/:year': 'BudgetController.getOrCreate'
+
 /*
     'post /Budget': 'BudgetController.create',
     'post /Budget/:id/addMoney': 'BudgetController.addMoneyToBudget',

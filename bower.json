@@ -9,6 +9,6 @@
   "private": true,
   "dependencies": {
     "moment-with-locales": "https://raw.githubusercontent.com/moment/moment/develop/min/moment-with-locales.js",
-    "sails.io.js": "~0.11.5"
+    "sails.io.js": "~0.10.3"
   }
 }

@@ -1,12 +1,16 @@
-define(['q'], function (Q) {
+define(['q', 'services/api'], function (Q, api) {
 
-    var user = 'dge';
+    var user = {
+        id: 'dge'
+    };
     var mockBudget = {};
 
     var dataService = {
         getBudgetForYear: function (year) {
 
-            return Q({
+            return api.get('/budget/' + user.id + '/' + year);
+
+            /*return Q({
                 year: year, owner: user, money: [
                     {
                         '2015-01-25': [
@@ -24,7 +28,7 @@ define(['q'], function (Q) {
                         ]
                     }
                 ]
-            });
+            });*/
         },
 
         addMoneyToBudget: function (budgetId, date, amount, type) {

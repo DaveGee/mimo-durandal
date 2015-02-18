@@ -8,6 +8,30 @@
 var moment = require('moment');
 
 module.exports = {
+
+    // get the budget, and creates one if necessary
+    // get  /Budget/:owner/:year
+    getOrCreate: function(req, res) {
+        var params = req.params.all();
+
+        var budgetToFind = {
+            owner: params.owner,
+            year: params.year
+        };
+
+        console.log(budgetToFind);
+
+        Budget.findOrCreate(budgetToFind, budgetToFind)
+            .populate('money')
+            .then(function(budget) {
+                res.json(budget);
+            })
+            .catch(function(err) {
+                res.serverError(err);
+            });
+    }
+
+
 /*
     // post /Budget
     create: function (req, res) {
@@ -21,25 +45,6 @@ module.exports = {
         }).catch(function(err) {
             return res.serverError(err);
         });
-    },
-
-    // get the budget, and creates one if necessary
-    // get  /Budget/:owner/:year
-    getOrCreate: function(req, res) {
-        var params = req.params.all();
-
-        var budgetToFind = {
-            owner: params.owner,
-            year: params.year
-        };
-
-        Budget.findOrCreate(budgetToFind, budgetToFind)
-            .then(function(budget) {
-                res.json(budget);
-            })
-            .catch(function(err) {
-                res.serverError(err);
-            });
     },
 
 
