@@ -16,9 +16,15 @@ module.exports = function(grunt) {
 		dev: {
 			files: [{
 				expand: true,
-				cwd: 'assets/styles/',
-				src: ['importer.less'],
-				dest: '.tmp/public/styles/',
+				cwd: 'less/custom',
+				src: ['mimo.less'],
+				dest: '.tmp/public/css/',
+				ext: '.css'
+			}, {
+				expand: true,
+				cwd: 'less/yeti-bootstrap',
+				src: ['yeti-bootstrap.less'],
+				dest: '.tmp/public/css/',
 				ext: '.css'
 			}]
 		}

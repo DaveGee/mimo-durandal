@@ -1,5 +1,12 @@
 @import '../yeti-bootstrap/variables.less';
 
+.transition-properties(...) {
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
+}
+
 .year-view {
   h1 {
     text-align: center;
@@ -23,6 +30,8 @@
     .has-money {
       color: @brand-danger;
       font-weight: bold;
+      font-size: 1.2em;
+      //.transition-properties(color 1s, font-size 1s, font-weight 1s;);
     }
 
     a, a:visited {

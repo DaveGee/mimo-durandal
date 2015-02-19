@@ -22,11 +22,15 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
                 moneyUnit.day = date;
 
                 ds.addMoneyToBudget(this.budget.id, moneyUnit).then(function (moneyUnit) {
-                    //TODO: show toast
-                    if(!this.money[moneyUnit.day]) {
-                        this.money[moneyUnit.day] = [];
+
+                    var date = moment(moneyUnit.day);
+                    var dateId = date.format('YYYY-MM-DD');
+
+                    if (!this.money[dateId]) {
+                        this.money[dateId] = [];
                     }
-                    this.money[moneyUnit.day].push(moneyUnit);
+                    this.money[dateId].push(moneyUnit);
+                    this.days[day.id].hasMoney = true;
 
                 }.bind(this));
             }.bind(this));
@@ -40,16 +44,17 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
         monthWidget.prototype.activate = function (settings) {
             this.monthNb = Math.min(settings.monthNb, 11);
             this.budget = settings.budget;
-            if(!this.budget) {
+            if (!this.budget) {
                 throw 'No budget, no chocolate!';
             }
 
-            this.callback = settings.select || function () {};
+            this.callback = settings.select || function () {
+            };
 
             return this.initCalendar();
         };
 
-        monthWidget.prototype.initCalendar = function() {
+        monthWidget.prototype.initCalendar = function () {
 
             var thisMonth = moment({
                 year: this.budget.year,
@@ -60,29 +65,41 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
                 dayEnd = thisMonth.clone().endOf('month').date(),
                 i = 0;
 
-            return Q.fcall(function() {
-                while (i < 42) {
+            return ds.getMonthMoney(this.budget.id, this.monthNb)
+                .then(function (monthMoneyArr) {
+                    // need to transform from : [{moneyUnit}, {moneyUnit}]
+                    // to : {'yy-mm-dd':[{moneyUnit}, {moneyUnit}], 'yy-mm-dd': ...}
 
-                    if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
+                    this.money = _.groupBy(monthMoneyArr, function (moneyUnit) {
+                        return moment(moneyUnit.day).format('YYYY-MM-DD');
+                    });
 
-                        var day = i - firstDayId + 1;
-                        var dayStr = thisMonth.date(day).format('YYYY-MM-DD');
+                }.bind(this))
+                .then(function () {
+                    while (i < 42) {
 
-                        this.days[i] = {
-                            day: day,
-                            hasMoney: this.money[dayStr] && this.money[dayStr].length > 0
-                        };
+                        if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
 
-                    } else {
-                        this.days[i] = {
-                            day: '',
-                            hasMoney: false
-                        };
+                            var day = i - firstDayId + 1;
+                            var dayStr = thisMonth.date(day).format('YYYY-MM-DD');
+
+                            this.days[i] = {
+                                id: i,
+                                day: day,
+                                hasMoney: this.money[dayStr] && this.money[dayStr].length > 0
+                            };
+
+                        } else {
+                            this.days[i] = {
+                                id: i,
+                                day: '',
+                                hasMoney: false
+                            };
+                        }
+
+                        i++;
                     }
-
-                    i++;
-                }
-            }.bind(this));
+                }.bind(this));
         };
 
         return monthWidget;
