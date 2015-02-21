@@ -1,10 +1,11 @@
-define(['q', 'services/api'], function (Q, api) {
+define(['q', 'services/api', 'toastr'], function (Q, api, toastr) {
 
     var user = {
         id: 'dge'
     };
 
     function handleErrors(err, details) {
+        toastr.error(err);
         console.log('API Error', err, details);
     }
 

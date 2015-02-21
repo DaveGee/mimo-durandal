@@ -1,8 +1,11 @@
 <div class="month">
-    <h2 data-bind="value: monthNb, format: 'monthName'"></h2>
+    <h2>
+        <a href="#" data-bind="click: selectMonth, textFormat: monthNb, format: 'monthName'"></a>
+        <span class="pull-right month-balance text-muted" data-bind="text: monthBalance"></span>
+    </h2>
 
     <div class="row" data-bind="foreach: daysInWeek">
-        <div class="weekday-name hidden-xs col-xs-12" data-bind="value: $data, format: 'dayNameShort'"></div>
+        <div class="weekday-name hidden-xs col-xs-12" data-bind="textFormat: $data, format: 'dayNameShort'"></div>
     </div>
 
     <!-- ko foreach: weeksInMonth -->
@@ -12,7 +15,7 @@
         <a href="#" class="col-xs-12"
            data-bind="click: $parents[2].dayClick.bind($parents[2], $data),
                     text: day,
-                    css: { 'has-money': hasMoney }">
+                    css: { 'has-money': $parents[2].money[dayStr] && $parents[2].money[dayStr].length > 0 }">
         </a>
         <!-- /ko -->
     </div>

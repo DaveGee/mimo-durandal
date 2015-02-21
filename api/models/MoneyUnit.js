@@ -35,13 +35,6 @@ module.exports = {
             defaultsTo: false
         },
 
-        type: {
-            type: 'string',
-            enum: ['debit', 'credit'],
-            defaultsTo: 'debit',
-            required: true
-        },
-
         description: {type: 'string'},
 
         budget: {

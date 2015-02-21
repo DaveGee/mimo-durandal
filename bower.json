@@ -10,6 +10,7 @@
   "dependencies": {
     "moment-with-locales": "https://raw.githubusercontent.com/moment/moment/develop/min/moment-with-locales.js",
     "sails.io.js": "~0.10.3",
-    "underscore": "~1.7.0"
+    "underscore": "~1.7.0",
+    "toastr": "~2.1.0"
   }
 }

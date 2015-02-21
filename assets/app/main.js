@@ -9,7 +9,8 @@
         'bootstrap': '../lib/bootstrap/js/bootstrap',
         'jquery': '../lib/jquery/jquery-1.9.1',
         'moment': '../lib/moment-with-locales/index',
-        'q': '../lib/q/q'
+        'q': '../lib/q/q',
+        'toastr': '../lib/toastr/toastr.min'
     },
     shim: {
         'bootstrap': {

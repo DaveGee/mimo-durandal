@@ -1,10 +1,13 @@
 @import '../yeti-bootstrap/variables.less';
+@import 'toastr.less';
 
-.transition-properties(...) {
-  -webkit-transition: @arguments;
-  -moz-transition: @arguments;
-  -o-transition: @arguments;
-  transition: @arguments;
+a, a:visited {
+  text-decoration: none;
+  color: @text-color;
+}
+a:hover {
+  text-decoration: none;
+  color: lighten(@text-color, 40%);
 }
 
 .year-view {
@@ -31,11 +34,9 @@
       color: @brand-danger;
       font-weight: bold;
       font-size: 1.2em;
-      //.transition-properties(color 1s, font-size 1s, font-weight 1s;);
     }
 
     a, a:visited {
-      text-decoration: none;
     }
     a:hover {
       background: @brand-info;
