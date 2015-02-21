@@ -4,6 +4,7 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
         var _dayFormat = 'YYYY-MM-DD';
 
         var monthWidget = function () {
+            // on what the calendar is bound to display the days
             this.days = [];
 
             this.daysInWeek = [0, 1, 2, 3, 4, 5, 6];
@@ -13,27 +14,24 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
                 // 'YYYY-MM-DD': [ { moneyUnit }, { moneyUnit } ]
             };
 
-            observable.defineProperty(this, 'monthBalance', function() {
+            observable.defineProperty(this, 'monthBalance', function () {
 
-                return _.reduce(_.values(this.money), function(balance, dayArr) {
-                    return balance + _.reduce(dayArr, function(dayBalance, dayData) {
-                            return dayData.type === 'credit' ? dayBalance + dayData.guessedAmount :
-                                dayBalance - dayData.guessedAmount;
-                        }, 0);
+                return _.reduce(this.money, function(balance, mu) {
+                    return balance + mu.guessedAmount;
                 }, 0);
 
             }.bind(this));
 
         };
 
-        monthWidget.prototype.selectMonth = function() {
+        monthWidget.prototype.selectMonth = function () {
 
             toastr['success']('Nice!');
         };
 
         monthWidget.prototype.dayClick = function (day) {
 
-            var date = moment({ day: day.day, month: this.monthNb, year: this.budget.year });
+            var date = moment({day: day.day, month: this.monthNb, year: this.budget.year});
 
             var form = new FormAddMoney(function (moneyUnit) {
 
@@ -41,14 +39,9 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
 
                 ds.addMoneyToBudget(this.budget.id, moneyUnit).then(function (moneyUnit) {
 
-                    var date = moment(moneyUnit.day);
-                    var dateId = date.format(_dayFormat);
+                    this.money.push(moneyUnit);
 
-                    if (!this.money[dateId]) {
-                        this.money[dateId] = [];
-                    }
-                    this.money[dateId].push(moneyUnit);
-                    this.days[day.id].hasMoney = true;
+                    toastr['success']('Nice!');
 
                 }.bind(this));
             }.bind(this));
@@ -69,7 +62,15 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
             this.callback = settings.select || function () {
             };
 
-            return this.initCalendar();
+            return this.initCalendar()
+                .then(function () {
+                    ds.getMonthMoney(this.budget.id, this.monthNb)
+                        .then(function (monthMoneyArr) {
+
+                            this.money = monthMoneyArr;
+
+                        }.bind(this))
+                }.bind(this));
         };
 
         monthWidget.prototype.initCalendar = function () {
@@ -83,37 +84,36 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
                 dayEnd = thisMonth.clone().endOf('month').date(),
                 i = 0;
 
-            return ds.getMonthMoney(this.budget.id, this.monthNb)
-                .then(function (monthMoneyArr) {
-                    // need to transform from : [{moneyUnit}, {moneyUnit}]
-                    // to : {'yy-mm-dd':[{moneyUnit}, {moneyUnit}], 'yy-mm-dd': ...}
+            return Q.fcall(function () {
+                while (i < 42) {
 
-                    this.money = _.groupBy(monthMoneyArr, function (moneyUnit) {
-                        return moment(moneyUnit.day).format(_dayFormat);
+                    this.days[i] = {
+                        id: i,
+                        day: '',
+                        dayStr: 'x'
+                    };
+
+                    var monthWidget = this;
+
+                    observable.defineProperty(this.days[i], 'hasMoney', function () {
+
+                        return !!_.find(monthWidget.money, function (mu) {
+                            return moment(mu.day).format(_dayFormat) === this.dayStr;
+                        }.bind(this));
                     });
 
-                }.bind(this))
-                .then(function () {
-                    while (i < 42) {
+                    if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
 
-                        this.days[i] = {
-                            id: i,
-                            day: '',
-                            dayStr: ''
-                        };
+                        var day = i - firstDayId + 1;
+                        var dayStr = thisMonth.date(day).format(_dayFormat);
 
-                        if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
-
-                            var day = i - firstDayId + 1;
-                            var dayStr = thisMonth.date(day).format(_dayFormat);
-
-                            this.days[i].day = day;
-                            this.days[i].dayStr = dayStr;
-                        }
-
-                        i++;
+                        this.days[i].day = day;
+                        this.days[i].dayStr = dayStr;
                     }
-                }.bind(this));
+
+                    i++;
+                }
+            }.bind(this));
         };
 
         return monthWidget;

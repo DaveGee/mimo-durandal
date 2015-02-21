@@ -12,11 +12,16 @@
 
     <div class="row dates" data-bind="foreach: $parent.daysInWeek">
         <!-- ko with: $parents[1].days[$data + $parent * 7] -->
-        <a href="#" class="col-xs-12"
-           data-bind="click: $parents[2].dayClick.bind($parents[2], $data),
-                    text: day,
-                    css: { 'has-money': $parents[2].money[dayStr] && $parents[2].money[dayStr].length > 0 }">
-        </a>
+            <!-- ko if: day -->
+                <a href="#" class="col-xs-12"
+                   data-bind="click: $parents[2].dayClick.bind($parents[2], $data),
+                            text: day,
+                            css: { 'has-money': hasMoney }">
+                </a>
+            <!-- /ko -->
+            <!-- ko if: !day -->
+                <span class="col-xs-12"></span>
+            <!-- /ko -->
         <!-- /ko -->
     </div>
 
