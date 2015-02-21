@@ -19,6 +19,11 @@ define(['moment'],
          * Round the value to 2 decimals and add ' between thousands
          */
         function currencyFormatFunc(value) {
+
+            if(typeof value === 'undefined' || value === null || value === '') {
+                return value;
+            }
+
             value = value ? value : 0;
 
             var withoutDecimals = Math.floor(Math.abs(value));

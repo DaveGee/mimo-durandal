@@ -12,7 +12,7 @@ define(['moment', 'knockout', 'services/formatter'], function (moment, ko, forma
 
             var writer = allBindings.get('es5Writer');
 
-            $(el).blur(function () {
+            $(el).change(function () {
 
                 var inputText = $(el).val().trim();
 
@@ -28,9 +28,7 @@ define(['moment', 'knockout', 'services/formatter'], function (moment, ko, forma
             var value = valueAccessor(),
                 format = allBindings().format || 'noformat';
 
-            if(typeof value !== 'undefined' && value !== null) {
-                $(el).val(formatSvc[format](value));
-            }
+            $(el).val(formatSvc[format](value));
         }
     };
 

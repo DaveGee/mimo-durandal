@@ -1,4 +1,4 @@
-define([], function () {
+define(['plugins/observable'], function (observable) {
 
 
     var FormAddMoney = function (newMoneyCb) {
@@ -6,6 +6,26 @@ define([], function () {
         this.newMoneyCb = newMoneyCb || function() {};
 
         this.reset();
+
+        observable(this, 'type').subscribe(function(value){
+            if(value === 'debit') {
+                this.guessedAmount = -Math.abs(this.guessedAmount);
+            }
+
+            if(value === 'credit') {
+                this.guessedAmount = Math.abs(this.guessedAmount);
+            }
+        }.bind(this));
+
+        observable(this, 'guessedAmount').subscribe(function(value) {
+            if(value < 0 && this.type === 'credit') {
+                this.guessedAmount = Math.abs(this.guessedAmount);
+            }
+
+            if(value > 0 && this.type === 'debit') {
+                this.guessedAmount = -Math.abs(this.guessedAmount);
+            }
+        }.bind(this));
     };
 
     FormAddMoney.prototype.reset = function () {
