@@ -16,7 +16,7 @@
                 <a href="#" class="col-xs-12"
                    data-bind="click: $parents[2].dayClick.bind($parents[2], $data),
                             text: day,
-                            css: { 'balance-positive': balance > 0, 'balance-negative': balance < 0 }">
+                            css: { 'balance-positive': balance !== null && balance >= 0, 'balance-negative': balance < 0 }">
                 </a>
             <!-- /ko -->
             <!-- ko if: !day -->
