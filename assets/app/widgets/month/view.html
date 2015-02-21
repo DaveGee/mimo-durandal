@@ -1,7 +1,7 @@
 <div class="month">
     <h2>
         <a href="#" data-bind="click: selectMonth, textFormat: monthNb, format: 'monthName'"></a>
-        <span class="pull-right month-balance text-muted" data-bind="text: monthBalance"></span>
+        <span class="pull-right month-balance text-muted" data-bind="textFormat: monthBalance, format: 'currencyRounded'"></span>
     </h2>
 
     <div class="row" data-bind="foreach: daysInWeek">
@@ -16,7 +16,7 @@
                 <a href="#" class="col-xs-12"
                    data-bind="click: $parents[2].dayClick.bind($parents[2], $data),
                             text: day,
-                            css: { 'has-money': hasMoney }">
+                            css: { 'balance-positive': balance > 0, 'balance-negative': balance < 0 }">
                 </a>
             <!-- /ko -->
             <!-- ko if: !day -->

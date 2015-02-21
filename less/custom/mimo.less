@@ -30,17 +30,22 @@ a:hover {
     line-height: 3em;
     font-size: 0.75em;
 
-    .has-money {
-      color: @brand-danger;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-
     a, a:visited {
+      background-repeat: no-repeat;
+      background-position: right center;
+
+      &.balance-negative, .balance-positive {
+        color: @brand-danger;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACxSURBVDjL7dItC8JQAIXh491HWbDvD1pEDIIKm1zDxqKi0WIULAZFYc1msF3ErEZlMC9Mhxx/gTAR28KpDxx4QRK/DCXwAbDg0oLMTShtQF0F5AlwvwHkqy+Zxxs+lwsmvs8DKrIw8DCh8njNLOxRtxrU4yF3MFRhIBFQ2XxG3W7yXq8xjULGsIsDFwF58zzq0YBpFPDc6XIKp/iFI4S7h5BbWGoFW03gyABVtyzxT8Ab8Xzei+tkcykAAAAASUVORK5CYII=);
+      }
+
+      &.balance-positive {
+        color: @brand-success;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC5SURBVDjLY/j//z8DJZhh1ADsBjjsspIC4gb77ZZX7TdbXLVda9Zgs8xEihQDGmZfm/7/0KOD/3ff3/V/6plJ/y3mGjYQbYD9NsurBx4e+D/10tT/nWc6/i+5sui/+RS9q0QbYLfB/OrWO1v+d5/p+t96qvn/3Auz/pt0aRNvgPVyk4appyf+X3xl4f/ZF2b+n3Co579+mSrxXrCcZyhlMV2/wbRP56pRq+ZV3SLlBq1EOanRlEgjAwAXIuIDq5qm/AAAAABJRU5ErkJggg==);
+      }
     }
     a:hover {
-      background: @brand-info;
-      color: white;
+      background-color: #eee;
     }
   }
 }

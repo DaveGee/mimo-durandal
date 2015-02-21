@@ -12,13 +12,18 @@ define(['moment'],
                 return moment({month: monthNb}).format('MMMM');
             },
 
-            'currency': currencyFormatFunc
+            'currency': function(value) {
+                return currencyFormatFunc(value, true);
+            },
+            'currencyRounded': function(value) {
+                return currencyFormatFunc(value, false);
+            },
         };
 
         /**
          * Round the value to 2 decimals and add ' between thousands
          */
-        function currencyFormatFunc(value) {
+        function currencyFormatFunc(value, includeDecimals) {
 
             if(typeof value === 'undefined' || value === null || value === '') {
                 return value;
@@ -70,7 +75,7 @@ define(['moment'],
             }
 
             // add suffix
-            return formatted + '.' + decimalStr;
+            return formatted + (includeDecimals ? '.' + decimalStr : '');
         }
 
     });

@@ -95,11 +95,15 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
 
                     var monthWidget = this;
 
-                    observable.defineProperty(this.days[i], 'hasMoney', function () {
+                    observable.defineProperty(this.days[i], 'balance', function () {
 
-                        return !!_.find(monthWidget.money, function (mu) {
-                            return moment(mu.day).format(_dayFormat) === this.dayStr;
-                        }.bind(this));
+                        return _.reduce(monthWidget.money, function (balance, mu) {
+                            if(moment(mu.day).format(_dayFormat) === this.dayStr) {
+                                return balance + mu.guessedAmount;
+                            }
+
+                            return balance;
+                        }.bind(this), 0);
                     });
 
                     if (i <= dayEnd + firstDayId - 1 && i >= firstDayId) {
