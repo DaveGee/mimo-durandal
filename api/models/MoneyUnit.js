@@ -28,7 +28,9 @@ module.exports = {
             required: true
         },
 
-        realAmount: {type: 'float'},
+        realAmount: {
+            type: 'float'
+        },
 
         isMonthly: {
             type: 'boolean',
