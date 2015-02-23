@@ -8,11 +8,29 @@
 module.exports = {
 
   attributes: {
-      year: {
-          type: 'integer',
-          defaultsTo: 2015,
+
+      name: {
+          type: 'string',
+          defaultsTo: 'Sans titre',
           required: true
       },
+
+      starts: {
+          type: 'date',
+          required: true,
+          before: function() {
+              return this.ends;
+          }
+      },
+
+      ends: {
+          type: 'date',
+          required: true,
+          after: function() {
+              return this.starts;
+          }
+      },
+
       owner: {
           type: 'string',
           required: true

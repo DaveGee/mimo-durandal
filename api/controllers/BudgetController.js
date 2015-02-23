@@ -16,15 +16,24 @@ module.exports = {
 
         var budgetToFind = {
             owner: params.owner,
-            year: params.year
+            name: params.year
         };
 
-        Budget.findOrCreate(budgetToFind, budgetToFind)
+        Budget.findOne(budgetToFind, budgetToFind)
             .populate('money')
             .then(function (budget) {
-                res.json(budget);
-            })
-            .catch(function (err) {
+                if(!budget) {
+                    var y = moment({ year: params.year });
+                    res.json(Budget.create({
+                        name: params.year,
+                        owner: params.owner,
+                        starts: y.startOf('year').clone().toDate(),
+                        ends: y.endOf('year').clone().toDate()
+                    }));
+                } else {
+                    res.json(budget);
+                }
+            }).catch(function(err) {
                 res.serverError(err);
             });
     },

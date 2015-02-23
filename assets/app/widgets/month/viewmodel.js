@@ -31,7 +31,7 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
 
         monthWidget.prototype.dayClick = function (day) {
 
-            var date = moment({day: day.day, month: this.monthNb, year: this.budget.year});
+            var date = moment({day: day.day, month: this.monthNb, year: this.budget.name});
 
             var form = new FormAddMoney(function (moneyUnit) {
 
@@ -76,7 +76,7 @@ define(['moment', 'q', 'services/dataservice', 'dialogs/composedModal', 'plugins
         monthWidget.prototype.initCalendar = function () {
 
             var thisMonth = moment({
-                year: this.budget.year,
+                year: this.budget.name,
                 month: this.monthNb
             });
 

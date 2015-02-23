@@ -10,6 +10,7 @@ define(['q', 'services/api', 'toastr'], function (Q, api, toastr) {
     }
 
     var dataService = {
+
         getBudgetForYear: function (year) {
 
             return api.get('/budget/' + user.id + '/' + year).catch(handleErrors);

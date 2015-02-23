@@ -194,7 +194,8 @@ a:hover {
   text-decoration: none;
   color: #888888;
 }
-.year-view h1 {
+.year-view h1,
+.index-view h1 {
   text-align: center;
 }
 .month .loader {

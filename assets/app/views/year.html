@@ -1,5 +1,5 @@
 <div class="year-view" data-bind="with: currentBudget">
-    <h1 data-bind="text: year"></h1>
+    <h1 data-bind="text: name"></h1>
     <div class="row">
         <div data-bind="month: { monthNb:  0, budget: $data, select: $root.daySelect.bind($root) }" class="col-lg-19 col-lg-offset-1 col-sm-38 col-sm-offset-1 col-xs-82 col-xs-offset-1"></div>
         <div data-bind="month: { monthNb:  1, budget: $data, select: $root.daySelect.bind($root) }" class="col-lg-19 col-lg-offset-2 col-sm-38 col-sm-offset-2 col-xs-82 col-xs-offset-1"></div>

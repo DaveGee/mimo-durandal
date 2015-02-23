@@ -7,7 +7,7 @@
         'transitions': '../lib/durandal/js/transitions',
         'knockout': '../lib/knockout/knockout-3.1.0',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
-        'jquery': '../lib/jquery/jquery-1.9.1',
+        'jquery': '../lib/jquery/dist/jquery',
         'moment': '../lib/moment-with-locales/index',
         'q': '../lib/q/q',
         'toastr': '../lib/toastr/toastr.min'
