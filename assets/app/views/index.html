@@ -1,5 +1,12 @@
 <div class="year-view" data-bind="with: currentBudget">
     <h1 data-bind="text: name"></h1>
 
-
+    <div class="row">
+        <div class="col-md-15 col-md-offset-15" data-bind="foreach: $root.period">
+            <div data-bind="text: label"></div>
+        </div>
+        <div class="col-md-39">
+            TODO
+        </div>
+    </div>
 </div>
