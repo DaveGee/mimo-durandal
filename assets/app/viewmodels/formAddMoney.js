@@ -1,7 +1,7 @@
 define(['plugins/observable'], function (observable) {
 
 
-    var FormAddMoney = function (newMoneyCb) {
+    var FormAddMoney = function (title, newMoneyCb) {
 
         this.newMoneyCb = newMoneyCb || function() {};
 

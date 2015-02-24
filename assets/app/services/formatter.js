@@ -17,7 +17,7 @@ define(['moment'],
             },
             'currencyRounded': function(value) {
                 return currencyFormatFunc(value, false);
-            },
+            }
         };
 
         /**

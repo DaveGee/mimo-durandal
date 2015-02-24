@@ -1,16 +1,35 @@
 <div class="year-view" data-bind="with: currentBudget">
-    <h1 data-bind="text: name"></h1>
+    <h1>Money in Money out</h1>
     <button data-bind="click: $root.addMoney.bind($root)">Clickiticlick</button>
 
     <div class="row">
-        <div class="col-md-15 col-md-offset-15" data-bind="foreach: $root.periods">
+
+        <div class="col-md-10 col-md-offset-10">
+            <div data-bind="text: name"></div>
+        </div>
+
+        <div class="col-md-10" data-bind="foreach: $root.periods">
             <div class="row">
                 <span data-bind="text: label"></span>
                 <span class="pull-right" data-bind="text: plannedBalance, format: 'currencyRounded'"></span>
             </div>
         </div>
+
         <div class="col-md-39">
-            TODO
+            <div class="row graphs">
+                <div class="col-xs-84">
+                    Graph
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-30" data-bind="foreach: $root.filteredUnits($root.selectedInterval)">
+                    <div data-bind="compose: 'partials/moneyUnit.html'"></div>
+                </div>
+                <div class="col-md-54" data-bind="compose: $root.form">
+
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

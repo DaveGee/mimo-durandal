@@ -31,6 +31,13 @@ module.exports = {
           }
       },
 
+      interval: {
+          type: 'string',
+          enum: ['month', 'day'],
+          required: true,
+          defaultsTo: 'month'
+      },
+
       owner: {
           type: 'string',
           required: true
