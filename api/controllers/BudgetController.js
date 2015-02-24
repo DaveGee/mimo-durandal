@@ -24,12 +24,14 @@ module.exports = {
             .then(function (budget) {
                 if(!budget) {
                     var y = moment({ year: params.year });
-                    res.json(Budget.create({
+                    Budget.create({
                         name: params.year,
                         owner: params.owner,
                         starts: y.startOf('year').clone().toDate(),
                         ends: y.endOf('year').clone().toDate()
-                    }));
+                    }).then(function(b) {
+                        res.json(b);
+                    });
                 } else {
                     res.json(budget);
                 }

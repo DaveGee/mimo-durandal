@@ -1,4 +1,5 @@
-define(['services/dataservice', 'moment'], function (ds, moment) {
+define(['services/dataservice', 'moment', 'plugins/observable'],
+    function (ds, moment, observable) {
 
     function fillPeriods(_budget) {
         var start = moment(_budget.starts),
@@ -6,33 +7,57 @@ define(['services/dataservice', 'moment'], function (ds, moment) {
             interval = 'month';
 
         var format = interval === 'month' ? 'MMMM' : 'DD MMM';
-
-        this.period = [];
+        var periods = [];
 
         while(start.isBefore(end)) {
 
             var date = start.clone();
 
-            this.period.push({
+            var period = {
                 date: date,
                 monthId: date.month(),
                 label: date.format(format),
-                balance: 0,
                 isSelected: false
+            };
+
+            observable.defineProperty(period, 'plannedBalance', function() {
+                return _.reduce(_budget.money, function(total, mu) {
+                    if(mu.monthId === this.monthId) {
+                        return total + mu.guessedAmount;
+                    } else {
+                        return total;
+                    }
+                }.bind(this), 0);
             });
+
+            periods.push(period);
 
             start.add(1, interval);
         }
 
-        return _budget;
+        return periods;
     }
 
     // public module and functions
     // ---------------------------
 
     var Index = function () {
-        this.currentBudget = ds.getBudgetForYear(2015).then(fillPeriods.bind(this));
-        this.period = [];
+        this.periods = [];
+        this.currentBudget = ds.getBudgetForYear(2015).then(function(b) {
+            observable.convertObject(b);
+            this.periods = fillPeriods(b);
+            return b;
+        }.bind(this));
+    };
+
+    Index.prototype.addMoney = function(moneyUnit) {
+        this.currentBudget.money.push({
+            guessedAmount: -1525.25,
+            day: new Date().getTime(),
+            description: '',
+            monthId: moment().month()
+        });
+
     };
 
     return Index;

@@ -1,9 +1,13 @@
 <div class="year-view" data-bind="with: currentBudget">
     <h1 data-bind="text: name"></h1>
+    <button data-bind="click: $root.addMoney.bind($root)">Clickiticlick</button>
 
     <div class="row">
-        <div class="col-md-15 col-md-offset-15" data-bind="foreach: $root.period">
-            <div data-bind="text: label"></div>
+        <div class="col-md-15 col-md-offset-15" data-bind="foreach: $root.periods">
+            <div class="row">
+                <span data-bind="text: label"></span>
+                <span class="pull-right" data-bind="text: plannedBalance, format: 'currencyRounded'"></span>
+            </div>
         </div>
         <div class="col-md-39">
             TODO
