@@ -12,18 +12,19 @@ define(['moment'],
                 return moment({month: monthNb}).format('MMMM');
             },
 
-            'currency': function(value) {
-                return currencyFormatFunc(value, true);
+            'currency': function(value, numberOfDec) {
+                return currencyFormatFunc(value, numberOfDec);
             },
-            'currencyRounded': function(value) {
-                return currencyFormatFunc(value, false);
+
+            'moment': function(value, format) {
+                return moment(value).format(format);
             }
         };
 
         /**
          * Round the value to 2 decimals and add ' between thousands
          */
-        function currencyFormatFunc(value, includeDecimals) {
+        function currencyFormatFunc(value, numberOfDec) {
 
             if(typeof value === 'undefined' || value === null || value === '') {
                 return value;
@@ -31,9 +32,12 @@ define(['moment'],
 
             value = value ? value : 0;
 
+            // TODO: manage number of decimals effectively... not only 0 or something
+            var includeDecimals = parseInt(numberOfDec, 10) > 0;
+
             var withoutDecimals = Math.floor(Math.abs(value));
 
-            // take the 2 decimals
+            // take the X decimals
             var decimals = Math.round((Math.abs(value) - withoutDecimals) * 100);
             var decimalStr = decimals.toString();
             if (decimals < 10) {

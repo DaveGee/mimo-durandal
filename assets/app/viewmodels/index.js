@@ -1,5 +1,5 @@
-define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/formAddMoney'],
-    function (ds, moment, observable, FormAddMoney) {
+define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/formAddMoney', 'toastr'],
+    function (ds, moment, observable, FormAddMoney, toastr) {
 
         function createPeriods(_budget) {
             var start = moment(_budget.starts),
@@ -45,7 +45,7 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
             var self = this;
             this.periods = [];
 
-            this.selectedInterval;
+            this.selectedInterval = null;
 
             this.currentBudget = ds.getBudgetForYear(2015).then(function (b) {
                 observable.convertObject(b);
@@ -54,18 +54,6 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
             }.bind(this));
 
             this.form = new FormAddMoney('title', this.addMoney.bind(this));
-            /*this.form = new FormAddMoney('title', function (moneyUnit) {
-
-                moneyUnit.day = date;
-
-                ds.addMoneyToBudget(this.currentBudget.id, moneyUnit).then(function () {
-                    //TODO: show toast
-
-                    this.currentBudget.money[moneyUnit.day.format('YYYY-MM-DD')];
-
-                    console.log(updateMonth);
-                }.bind(this));
-            }.bind(this));*/
         };
 
         Index.prototype.filteredUnits = function (interval) {
@@ -79,7 +67,13 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
                 moneyUnit.day = m.toDate();
                 moneyUnit.monthId = m.month();
             }
-            this.currentBudget.money.push(moneyUnit);
+
+            ds.addMoneyToBudget(this.currentBudget.id, moneyUnit).then(function () {
+                this.currentBudget.money.push(moneyUnit);
+
+                toastr.success('Ajouté ' + moneyUnit.guessedAmount + ' au budget');
+
+            }.bind(this));
         };
 
         return Index;

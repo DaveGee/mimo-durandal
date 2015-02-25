@@ -1,5 +1,5 @@
 <div class="year-view" data-bind="with: currentBudget">
-    <h1>Money in Money out</h1>
+    <!--<h1>Money in Money out</h1>-->
     <button data-bind="click: $root.addMoney.bind($root)">Clickiticlick</button>
 
     <div class="row">
@@ -11,7 +11,7 @@
         <div class="col-md-10" data-bind="foreach: $root.periods">
             <div class="row">
                 <span data-bind="text: label"></span>
-                <span class="pull-right" data-bind="text: plannedBalance, format: 'currencyRounded'"></span>
+                <span class="pull-right" data-bind="text: plannedBalance, format: 'currency:0'"></span>
             </div>
         </div>
 

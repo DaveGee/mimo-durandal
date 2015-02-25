@@ -1,11 +1,11 @@
 <div class="month">
     <h2>
         <a href="#" data-bind="click: selectMonth, textFormat: monthNb, format: 'monthName'"></a>
-        <span class="pull-right month-balance text-muted" data-bind="textFormat: monthBalance, format: 'currencyRounded'"></span>
+        <span class="pull-right month-balance text-muted" data-bind="format: monthBalance, textFormat: 'currency:0'"></span>
     </h2>
 
     <div class="row" data-bind="foreach: daysInWeek">
-        <div class="weekday-name hidden-xs col-xs-12" data-bind="textFormat: $data, format: 'dayNameShort'"></div>
+        <div class="weekday-name hidden-xs col-xs-12" data-bind="text: $data, textFormat: 'dayNameShort'"></div>
     </div>
 
     <!-- ko foreach: weeksInMonth -->

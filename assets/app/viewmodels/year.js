@@ -19,8 +19,6 @@ define(['services/dataservice', 'dialogs/composedModal', 'plugins/dialog', 'view
                         //TODO: show toast
 
                         this.currentBudget.money[moneyUnit.day.format('YYYY-MM-DD')];
-
-                        console.log(updateMonth);
                     }.bind(this));
             }.bind(this));
 
