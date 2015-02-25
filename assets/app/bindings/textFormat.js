@@ -9,7 +9,7 @@ define(['moment', 'knockout', 'services/formatter'], function (moment, ko, forma
             var format = valueAccessor() || 'noformat',
                 value = allBindings().text;
 
-            var argRx = /^([^:]+)\:(.+)$/.exec(format),
+            var argRx = /^([^:]+)\|(.+)$/.exec(format),
                 func = format,
                 args = '';
 

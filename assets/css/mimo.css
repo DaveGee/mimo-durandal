@@ -236,6 +236,20 @@ a:hover {
 .month .weekday-name a:hover {
   background-color: #eee;
 }
+.intervals {
+  background-color: lightsteelblue;
+}
+.intervals .interval-selector {
+  display: block;
+  line-height: 50px;
+  font-size: 1.2em;
+}
+.intervals .interval-selector .interval-label {
+  text-transform: uppercase;
+}
+.graphs {
+  height: 200px;
+}
 footer {
   font-size: 0.75em;
   color: #999999;

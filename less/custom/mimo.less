@@ -5,6 +5,7 @@ a, a:visited {
   text-decoration: none;
   color: @text-color;
 }
+
 a:hover {
   text-decoration: none;
   color: lighten(@text-color, 40%);
@@ -48,6 +49,23 @@ a:hover {
       background-color: #eee;
     }
   }
+}
+
+.intervals {
+  background-color: lightsteelblue;
+  .interval-selector {
+    display: block;
+    line-height: 50px;
+    font-size: 1.2em;
+
+    .interval-label {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.graphs {
+  height: 200px;
 }
 
 footer {
