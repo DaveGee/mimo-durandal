@@ -1,5 +1,7 @@
 <div>
-    <span data-bind="text: description"></span>
-    <span data-bind="text: guessedAmount, textFormat: 'currency|0'"></span>
-    <span data-bind="text: day, textFormat: 'moment|DD.MM'"></span>
+    <div>
+        <span data-bind="text: day, textFormat: 'moment|DD.MM'"></span>
+        <span class="pull-right" data-bind="text: guessedAmount, textFormat: 'currency|0'"></span>
+    </div>
+    <div data-bind="text: description"></div>
 </div>

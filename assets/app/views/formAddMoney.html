@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-sm-42 ">
+        <div class="col-sm-84">
             <div class="form-group has-feedback">
                 <label class="control-label sr-only" for="montant">Montant</label>
                 <input type="text" class="form-control input-sm" id="montant" placeholder="Montant" data-bind="valueFormat: guessedAmount, format: 'currency'">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-42">
+        <div class="col-sm-84">
             <div class="radio">
                 <label>
                     <input type="radio" name="moveType" id="moveDebit" value="debit" data-bind="checked: type">
@@ -29,7 +29,9 @@
                 </label>
             </div>
         </div>
-        <div class="col-sm-42">
+    </div>
+    <div class="row">
+        <div class="col-sm-84">
             <div class="radio">
                 <label>
                     <input type="radio" name="moveType" id="moveCredit" value="credit" data-bind="checked: type">

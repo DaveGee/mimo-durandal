@@ -7,24 +7,24 @@
             <div data-bind="text: name"></div>
         </div>
 
-        <div class="col-md-12 intervals" data-bind="foreach: $root.periods">
+        <div class="col-md-15 intervals" data-bind="foreach: $root.periods">
             <a href="#" class="row interval-selector">
                 <div class="col-xs-50 interval-label" data-bind="text: label"></div>
                 <div class="col-xs-34 text-right text-muted" data-bind="text: plannedBalance, textFormat: 'currency|0'"></div>
             </a>
         </div>
 
-        <div class="col-md-39">
+        <div class="col-md-36">
             <div class="row">
                 <div class="col-xs-84 graphs">
                     Graph
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-30" data-bind="foreach: $root.filteredUnits($root.selectedInterval)">
+                <div class="col-md-34" data-bind="foreach: $root.filteredUnits($root.selectedInterval)">
                     <div data-bind="compose: 'partials/moneyUnit.html'"></div>
                 </div>
-                <div class="col-md-54" data-bind="compose: $root.form">
+                <div class="col-md-50" data-bind="compose: $root.form">
 
                 </div>
             </div>

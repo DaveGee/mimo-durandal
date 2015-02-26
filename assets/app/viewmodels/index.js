@@ -45,7 +45,13 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
             var self = this;
             this.periods = [];
 
-            this.selectedInterval = null;
+            this.unitFilter = {
+                interval: null,
+                order: {
+                    data: 'day',
+                    dir: 'asc'
+                }
+            };
 
             this.currentBudget = ds.getBudgetForYear(2015).then(function (b) {
                 observable.convertObject(b);
