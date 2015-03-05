@@ -46,7 +46,7 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
             this.periods = [];
 
             this.unitFilter = {
-                interval: null,
+                period: null,
                 order: {
                     data: 'day',
                     dir: 'asc'
@@ -63,12 +63,16 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
         };
 
         Index.prototype.filteredUnits = function (interval) {
-            return this.currentBudget.money;
+            if (this.unitFilter.period !== null) {
+                return _.where(this.currentBudget.money, {monthId: this.unitFilter.period});
+            } else {
+                return this.currentBudget.money;
+            }
         };
 
         Index.prototype.addMoney = function (moneyUnit) {
 
-            if(!moneyUnit.day) {
+            if (!moneyUnit.day) {
                 var m = moment(this.selectedInterval ? this.selectedInterval.date : this.currentBudget.ends);
                 moneyUnit.day = m.toDate();
                 moneyUnit.monthId = m.month();
@@ -80,6 +84,10 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
                 toastr.success('Ajouté ' + moneyUnit.guessedAmount + ' au budget');
 
             }.bind(this));
+        };
+
+        Index.prototype.selectPeriod = function (data) {
+            this.unitFilter.period = data.monthId;
         };
 
         return Index;

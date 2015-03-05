@@ -9,7 +9,8 @@
             router.map([
                 {route: '', title: 'Budget', moduleId: 'viewmodels/index', nav: true},
                 {route: 'year', title: 'Calendrier', moduleId: 'viewmodels/year', nav: true},
-                {route: 'detailed', title: 'Vue détaillée', moduleId: 'viewmodels/detailed', nav: true}
+
+                {route: 'period/:p', title: 'Budget', moduleId: 'viewmodels/index', nav: true}
 
             ]).buildNavigationModel();
 

@@ -247,6 +247,9 @@ a:hover {
 .intervals .interval-selector .interval-label {
   text-transform: uppercase;
 }
+.intervals .interval-selector.active {
+  background-color: #e99002;
+}
 .graphs {
   height: 200px;
 }
