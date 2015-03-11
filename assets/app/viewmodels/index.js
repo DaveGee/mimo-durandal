@@ -38,6 +38,10 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
             return periods;
         }
 
+        function orderMoney(budget) {
+            budget.money = _.sortBy(budget.money, 'day');
+        }
+
         // public module and functions
         // ---------------------------
 
@@ -56,6 +60,9 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
             this.currentBudget = ds.getBudgetForYear(2015).then(function (b) {
                 observable.convertObject(b);
                 this.periods = createPeriods(b);
+
+                orderMoney(b);
+
                 return b;
             }.bind(this));
 
@@ -73,7 +80,7 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
         Index.prototype.addMoney = function (moneyUnit) {
 
             if (!moneyUnit.day) {
-                var m = moment(this.selectedInterval ? this.selectedInterval.date : this.currentBudget.ends);
+                var m = moment(this.unitFilter.period !== null ? { month: this.unitFilter.period } : this.currentBudget.ends).endOf('month');
                 moneyUnit.day = m.toDate();
                 moneyUnit.monthId = m.month();
             }
@@ -81,13 +88,19 @@ define(['services/dataservice', 'moment', 'plugins/observable', 'viewmodels/form
             ds.addMoneyToBudget(this.currentBudget.id, moneyUnit).then(function () {
                 this.currentBudget.money.push(moneyUnit);
 
+                orderMoney(this.currentBudget);
+
                 toastr.success('Ajouté ' + moneyUnit.guessedAmount + ' au budget');
 
             }.bind(this));
         };
 
         Index.prototype.selectPeriod = function (data) {
-            this.unitFilter.period = data.monthId;
+            this.unitFilter.period = (this.unitFilter.period === data.monthId ? null : data.monthId);
+        };
+
+        Index.prototype.showForm = function() {
+
         };
 
         return Index;

@@ -11,6 +11,16 @@
     </div>
     <div class="row">
         <div class="col-sm-84">
+
+            <div class="form-group has-feedback">
+                <label class="control-label sr-only" for="description">Description</label>
+                <input type="text" class="form-control input-sm" id="description" placeholder="Description" data-bind="value: description">
+                <span class="glyphicon glyphicon-ok form-control-feedback" data-bind="visible: false"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-84">
             <div class="checkbox">
                 <label>
                     <input type="checkbox" id="isMonthly" value="monthly" data-bind="checked: isMonthly">
@@ -41,16 +51,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-84">
-
-            <div class="form-group has-feedback">
-                <label class="control-label sr-only" for="description">Description</label>
-                <input type="text" class="form-control input-sm" id="description" placeholder="Description" data-bind="value: description">
-                <span class="glyphicon glyphicon-ok form-control-feedback" data-bind="visible: false"></span>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-xs-84">

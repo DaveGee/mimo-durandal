@@ -17,15 +17,16 @@
 
         <div class="col-md-36">
             <div class="row">
-                <div class="col-xs-84 graphs">
+                <div class="col-xs-84 graph">
                     Graph
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-34" data-bind="foreach: $root.filteredUnits()">
+                <div class="col-md-84"><a href="#" data-bind="click: $root.showForm">Add</a></div>
+                <div class="" data-bind="foreach: $root.filteredUnits(), css: { 'col-md-24' : false, 'col-md-84': true }">
                     <div data-bind="compose: 'partials/moneyUnit.html'"></div>
                 </div>
-                <div class="col-md-50" data-bind="compose: $root.form">
+                <div class="col-md-60" data-bind="compose: $root.form, visible: false">
 
                 </div>
             </div>
